@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aprende Ingles e Espanhol - Adriano</title><style>body{font-family:Arial;background:#0F172A;color:white;margin:0;padding:20px;text-align:center}h1{color:#22C55E}.card{background:white;color:#111;border-radius:16px;padding:20px;margin:15px auto;max-width:500px;text-align:left}button{background:#22C55E;color:white;border:none;padding:12px 18px;border-radius:10px;font-weight:bold;cursor:pointer;margin:5px;width:100%}.opt{background:#E2E8F0;color:#111}.ok{background:#22C55E!important;color:white!important}.err{background:#EF4444!important;color:white!important}</style></head><body><h1>Aprende Ingles e Espanhol</h1><p>Por Adriano da Cruz - Louveira/SP</p><p>Escolha uma palavra e aprenda!</p><div id="app" class="card"></div><button onclick="next()">Proxima Palavra ➡️</button><button onclick="quiz()">Fazer Quiz 🎯</button><div id="quiz" class="card" style="display:none"></div><script>
+const words=[
+{pt:"Bom dia",en:"Good morning",es:"Buenos dias",ex:"Good morning, friend!"},
+{pt:"Obrigado",en:"Thank you",es:"Gracias",ex:"Thank you very much!"},
+{pt:"Agua",en:"Water",es:"Agua",ex:"I want water"},
+{pt:"Casa",en:"House",es:"Casa",ex:"My house is big"},
+{pt:"Comida",en:"Food",es:"Comida",ex:"I love food"},
+{pt:"Familia",en:"Family",es:"Familia",ex:"My family is great"},
+{pt:"Trabalho",en:"Work",es:"Trabajo",ex:"I go to work"},
+{pt:"Amigo",en:"Friend",es:"Amigo",ex:"You are my friend"},
+];
+let i=0;
+function show(){let w=words[i];document.getElementById('app').innerHTML='<h2>'+w.pt+'</h2><p><b>Ingles:</b> '+w.en+'</p><p><b>Espanhol:</b> '+w.es+'</p><p><i>Exemplo: '+w.ex+'</i></p><button onclick="falar(\''+w.en+'\')">🔊 Ouvir em Ingles</button><button onclick="falar(\''+w.es+'\')">🔊 Ouvir em Espanhol</button>';}
+function falar(t){speechSynthesis.speak(new SpeechSynthesisUtterance(t));}
+function next(){i=(i+1)%words.length;show();}
+function quiz(){let w=words[Math.floor(Math.random()*words.length)];let opts=[w.en,words[(i+1)%words.length].en,words[(i+2)%words.length].en];document.getElementById('quiz').style.display='block';document.getElementById('quiz').innerHTML='<h3>Como se diz <b>'+w.pt+'</b> em Ingles?</h3>'+opts.map(o=>'<button class="opt" onclick="check(this,\''+o+'\',\''+w.en+'\')">'+o+'</button>').join('');}
+function check(btn,o,certo){if(o===certo){btn.classList.add('ok');btn.innerText='Correto! 🎉';}else{btn.classList.add('err');btn.innerText='Tenta de novo!';}}
+show();
+</script><p style="margin-top:20px">WhatsApp: (19) 99893-2588</p></body></html>
